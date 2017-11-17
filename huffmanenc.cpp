@@ -52,23 +52,39 @@ int main (int argc, char **argv) {
 
     Huff huff;
     char g;
-    while ( (g = fgetc(fp)) != EOF )
+    int count = 0;
+    while ( (g = fgetc(fp)) != EOF ){
+      count++;
       huff.add(g);
+    }
     
     rewind(fp); 
-    fclose(fp);
+    
 
     heap h;
 
     // insertion and automatic sorting process
-    for (int i = 0; i < huff.c.size(); i++){
+    for (int i = 0; i < huff.c.size(); i++)
       h.insert(new node(huff.c.at(i), huff.f.at(i)));
-         cout << huff.c.at(i) << " : " << huff.f.at(i) << endl;
-    }
-
-        h.print();
-
-    
+     
+    h.print();                                // Printing codes
+   
     cout << "----------------------------------------" << endl;
 
+    int sum = 0;
+    for (int i = 0; i < count; i++)  // Encoding    
+      sum += h.printCode(fgetc(fp));
+
+     cout << endl;
+
+     cout << "----------------------------------------" << endl;
+
+     cout<< "There are a total of "<< count <<" symbols that are encoded."<< endl;
+     cout<< "There are "<< huff.c.size() <<" distinct symbols used."<< endl;
+     cout<< "There were "<< count*8 <<" bits in the original file."<< endl;
+     cout<< "There were "<< sum <<" bits in the compressed file."<< endl;
+     cout<< "This gives a compression ratio of "<< count*8.0/sum <<"."<< endl;
+     cout<< "The cost of the Huffman tree is "<< sum*1.0/count <<" bits per character."<< endl;
+
+     fclose(fp);
 }

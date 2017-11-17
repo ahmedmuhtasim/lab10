@@ -1,3 +1,7 @@
+// Muhtasim Ahmed, ma2qf
+// 11/17/17
+// heap.cpp
+
 #include <iostream>
 #include "heap.h"
 using namespace std;
@@ -81,24 +85,58 @@ bool heap::isEmpty() {
 }
 
 void heap::buildTree() {
-  while (heap_size != 2){
+  while (heap_size != 1){
     node *a = deleteMin();
     node *b = deleteMin();
     insert(new node(a, b));
   }
 }
 
-string heap::toString(node *n){
-  if (!(n->isBlank())){
-    string a = " ";
-    a += n->c;
-    return a + "\n";
+void heap::print(string a, node *n){
+  if(!(n->isBlank())){
+    cout << n->c << " " << a << endl;
+    return;
   }
 
-  return "0" + toString(n->l) + "1" + toString(n->r);
+  string retL = a, retR = a;
+  retL += "0";
+  retR += "1";
+
+  print(retL, n->l);
+  print(retR, n->r);
+
 }
 
-void heap::print() {    
-  buildTree();          // just for safety
-  cout << toString(h[1]) << endl;
+void heap::print() {
+     buildTree();          // just for safety
+     print("", h[1]);
+}
+
+void heap::printCode(int i, char c, string a, node *n){
+  if(!(n->isBlank())){
+    if (n->c==c){
+      cout << a << " ";
+      set(i);
+    }
+    return;
+  }
+  
+
+  string retL = a, retR = a;
+  retL += "0";
+  retR += "1";
+
+  printCode(i+1, c, retL, n->l);
+  printCode(i+1, c, retR, n->r);
+
+}
+
+void heap::set(int i){
+  counter = i;
+}
+
+int heap::printCode(char c) {
+     buildTree();          // just for safety
+     printCode(0, c, "", h[1]);
+     return counter;
 }

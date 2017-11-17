@@ -1,3 +1,7 @@
+// Muhtasim Ahmed, ma2qf
+// 11/17/17
+// heap.h
+
 #ifndef HEAP_H
 #define HEAP_H
 
@@ -17,16 +21,21 @@ public:
     unsigned int size();
     void makeEmpty();
     bool isEmpty();
-    string toString(node *n);
     void buildTree();
+    void print(string a, node *n);
     void print();
+    void printCode(int i, char c, string a, node *n);
+    int printCode(char c);
 
 private:
     vector<node *> h;
     unsigned int heap_size;
+    int counter;
 
     void percolateUp(int hole);
     void percolateDown(int hole);
+    
+    void set(int i);
 };
 
 #endif

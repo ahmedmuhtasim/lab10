@@ -1,3 +1,7 @@
+// Muhtasim Ahmed, ma2qf
+// 11/17/17
+// node.cpp
+
 #include "node.h"
 using namespace std;
 
