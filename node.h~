@@ -1,20 +1,9 @@
-#ifndef NODE_H
-#define NODE_H
+#import <Foundation/NSObject.h>
 
-using namespace std;
+@interface node : NSObject
 
-class binary_heap {
-public:
-  node(node *a, node *b);
-  node(char a, int b);
-      ~node();
+@property int value;
 
-private:
-    char c;
-    int f;
-    node *l, *r;
-    
-    friend class heap;
-};
+@property node* next;
 
-#endif
+@end
